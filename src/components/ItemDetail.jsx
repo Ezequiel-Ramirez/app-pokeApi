@@ -5,13 +5,11 @@ import "../css/itemdetail.css"
 import { Link } from 'react-router-dom';
 
 const ItemDetail = () => {
-    const { item, idItem, getItem, stateSpinner, setStateSpinner } = useContext(PokeContext);
+    const { item, idItem, getItem, stateSpinner, setStateSpinner, setText, setItem, getPoke, setSearchBar } = useContext(PokeContext);
 
-    setTimeout(() => {
-        setStateSpinner(false);
-    }, 1000);
     useEffect(() => {
         getItem(idItem);
+    
     }, [])
 
     return (
@@ -51,7 +49,7 @@ const ItemDetail = () => {
                             </div>
                         </div>
                     </div>
-                       <Link to="/" className="text-decoration-none"> <button className="d-block m-auto ">volver</button></Link>
+                       <Link to="/" className="text-decoration-none"> <button className="d-block m-auto " onClick={()=>setSearchBar(false)}>volver</button></Link>
                         </>
             }
         </>

@@ -10,6 +10,7 @@ const PokeProvider = ({ children }) => {
     const [item, setItem] = useState([]);
     const [error, setError] = useState("");
     const [stateSpinner, setStateSpinner] = useState(true)
+    const [searchBar, setSearchBar] = useState(false)
 
 
     const validarCampos = () => {
@@ -24,7 +25,8 @@ const PokeProvider = ({ children }) => {
         const res = await fetch(url);
         const newPoke = await res.json();
         setItem(newPoke);
-       
+        setSearchBar(true);
+        setText("");
     }
     const getPoke = async () => {
         try {
@@ -47,14 +49,11 @@ const PokeProvider = ({ children }) => {
             console.log(error);
             
         }
-
-        setText("");
-        
     }
 
    
 
-    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke,  item, getItem, stateSpinner, setStateSpinner }
+    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke,  item, setItem, getItem, stateSpinner, setStateSpinner , searchBar, setSearchBar}
     return (
         <PokeContext.Provider value={data}>
             {children}
