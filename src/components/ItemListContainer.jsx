@@ -3,13 +3,14 @@ import PokeContext from '../context/PokeContext'
 import CardPoke from './CardPoke';
 
 const ItemListContainer = () => {
-    const { pokeItem, stateSearch, getPoke, getItem, item } = useContext(PokeContext);
+    const { pokeItem, stateSearch,  getPoke } = useContext(PokeContext);
+    
 
     useEffect(() => {
         
-       getPoke();
+      getPoke()
      
-    }, [getPoke])
+    }, [])
    
     return (
         <div className="container txtHeader" >

@@ -1,30 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom';
+import PokeContext from '../context/PokeContext'
 
 const CardPoke = ({ pokemon }) => {
+    const { setIdItem } = useContext(PokeContext);
     return (
-        <div className="card col-lg-3 col-md-4 mt-2  m-auto ">
-
+        <div className="card col-lg-3 col-md-4 mt-2  m-auto " onClick={()=>setIdItem(pokemon.id)}>
             <div className="card-body ">
-                <h4 className="text-center text-dark">{pokemon.name}</h4>
-
+        <Link to="/itemDetail" className="text-decoration-none" >
+               
                 <figure className=" m-auto">
                     <img className="d-block m-auto" src={pokemon.sprites.front_default} alt={pokemon.name} />
-
                     <h3 className="text-center text-dark">{pokemon.name}</h3>
                     <p className="text-center text-dark">#0{pokemon.id}</p>
-
-                </figure>
-
-                {/*  <Link to={`/item/${hero.id}`}> <button className="btn btn-outline-dark m-2  " onClick={()=>setIdItem(hero.id)}>+ Info</button></Link> */}
-                {/*   {
-                user?.id &&
-             
-               
-                <button onClick={() => tercerFuncion(hero)} className={`btn  ${isAdded(hero) ? "btn-danger" : "btn-success"}`} >{`${isAdded(hero) ? "Eliminar" : "Agregar"} `}</button>
-               
-                
-            } */}
-
+                </figure> 
+        </Link>
             </div>
         </div>
     )
