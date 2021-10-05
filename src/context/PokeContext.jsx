@@ -43,7 +43,7 @@ const PokeProvider = ({ children }) => {
             } catch (error) {
                 setError(error || "Ocurrió un error")
                 console.log(error);
-                alert(error)
+                
             }
         }
 

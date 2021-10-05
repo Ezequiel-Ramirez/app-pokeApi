@@ -16,7 +16,9 @@ const SearchBar = () => {
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    required
+                    className="isEmpty(str [, options])"
+                    data-errormessage-custom-error="Ingrese un id o nombre válido"
+                    data-errormessage-value-missing="Ingrese un id o nombre válido"
                 />
                 <Button className="btnSearch" onClick={() => getItem(text)} variant="outline-secondary" id="button-addon2">
                     Buscar
