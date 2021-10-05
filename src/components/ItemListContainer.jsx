@@ -10,14 +10,8 @@ const ItemListContainer = () => {
 
 
     useEffect(() => {
-        if (item !== "") {
-            getItem()
-        } else {
-            
-        }
             getPoke()
-        
-
+    
     }, [])
 
     if (searchBar ) {

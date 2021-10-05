@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext,  useState } from "react";
 
 
 const PokeContext = createContext();
@@ -28,6 +28,7 @@ const PokeProvider = ({ children }) => {
         setSearchBar(true);
         setText("");
     }
+
     const getPoke = async () => {
         try {
             const url = "https://pokeapi.co/api/v2/pokemon/?limit=16&offset=0";
@@ -43,17 +44,14 @@ const PokeProvider = ({ children }) => {
                     setError(error || "Ocurrió un error")
                 }
             }
-           
         } catch (error) {
             setError(error || "Ocurrió un error")
             console.log(error);
-            
         }
     }
 
-   
 
-    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke,  item, setItem, getItem, stateSpinner, setStateSpinner , searchBar, setSearchBar}
+    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke, item, setItem, getItem, stateSpinner, setStateSpinner, searchBar, setSearchBar }
     return (
         <PokeContext.Provider value={data}>
             {children}
