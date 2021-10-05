@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Pokemon Api
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto desafío consumiendo API Pokemon realizado con React[Create React App](https://app-poke-api.vercel.app/).
 
 ## Available Scripts
 
