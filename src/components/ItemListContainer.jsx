@@ -6,20 +6,21 @@ import SearchBar from './SearchBar';
 import Spinner from './Spinner';
 
 const ItemListContainer = () => {
-    const { pokeItem, getPoke, stateSpinner, text, getItem, idItem, setIdItem, item, searchBar, setItem, setText, setSearchBar } = useContext(PokeContext);
+    const { pokeItem, getPoke, stateSpinner, item, searchBar, setSearchBar } = useContext(PokeContext);
 
 
     useEffect(() => {
-            getPoke()
+        getPoke()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (searchBar ) {
+    if (searchBar) {
         return (
             <div className="container txtHeader">
                 <div className="row">
-            <SearchBar />
-            <CardPoke pokemon={item} key={item.id}/>
-            <Link to="/" className="text-decoration-none"><button className="btn btn-dark d-block m-auto" onClick={()=>setSearchBar(false)}>Reset</button></Link>
+                    <SearchBar />
+                    <CardPoke pokemon={item} key={item.id} />
+                    <Link to="/" className="text-decoration-none"><button className="btn btn-dark d-block m-auto" onClick={() => setSearchBar(false)}>Reset</button></Link>
                 </div>
             </div>
         )

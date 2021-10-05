@@ -1,10 +1,10 @@
-import React,{ useContext } from 'react'
+import React, { useContext } from 'react'
 import { FormControl, InputGroup, Button } from 'react-bootstrap';
 import PokeContext from '../context/PokeContext'
 import "../css/searchbar.css";
 
 const SearchBar = () => {
-    const { text, setText, getItem  } = useContext(PokeContext);
+    const { text, setText, getItem } = useContext(PokeContext);
 
     return (
         <div className="container ">
@@ -18,7 +18,7 @@ const SearchBar = () => {
                     onChange={(e) => setText(e.target.value)}
                     required
                 />
-                <Button className="btnSearch" onClick={() =>  getItem(text)} variant="outline-secondary" id="button-addon2">
+                <Button className="btnSearch" onClick={() => getItem(text)} variant="outline-secondary" id="button-addon2">
                     Buscar
                 </Button>
             </InputGroup>

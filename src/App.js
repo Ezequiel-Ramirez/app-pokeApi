@@ -1,6 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
-import './App.css';
 import ItemDetail from './components/ItemDetail';
 import ItemListContainer from './components/ItemListContainer';
 import { PokeProvider } from './context/PokeContext';
