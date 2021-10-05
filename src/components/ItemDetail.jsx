@@ -26,7 +26,7 @@ const ItemDetail = () => {
                         <div className="container d-flex justify-content-center">
                             <button onClick={() => getItem((item.id) - 1)} className="btn btn-outline-dark h-50 m-auto fw-bold">#{item.id - 1}</button>
                             <div className="w-100">
-                                <img className="d-block m-auto w-50" src={item?.sprites?.other?.dream_world?.front_default} alt={item?.name} />
+                                <img className="d-block m-auto w-50" src={item?.imgDetail} alt={item?.name} />
                             </div>
                             <div className="w-100">
                                 <div className="d-flex">
@@ -42,11 +42,9 @@ const ItemDetail = () => {
                                     </div>
                                     <div>
                                         <h6>Type</h6>
-                                        <p className="type">Fire</p>
-                                        {/*  <p>{item?.types[0]?.type?.name}</p> */}
+                                        <p className="type">{item?.type}</p>
                                         <h6>Abilities</h6>
-                                        <p>sturdy</p>
-                                        {/* <p>{item?.abilities[1]?.ability?.name}</p> */}
+                                        <p>{item?.ability}</p>
                                     </div>
                                 </div>
                             </div>

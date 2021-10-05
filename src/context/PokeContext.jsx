@@ -26,7 +26,17 @@ const PokeProvider = ({ children }) => {
                 const url = "https://pokeapi.co/api/v2/pokemon/" + id;
                 const res = await fetch(url);
                 const newPoke = await res.json();
-                setItem(newPoke);
+                const pokemon = {
+                    name: newPoke.name,
+                    id: newPoke.id,
+                    img: newPoke.sprites?.front_default,
+                    imgDetail: newPoke.sprites?.other?.dream_world?.front_default,
+                    height: newPoke.height,
+                    weight: newPoke.weight,
+                    type: newPoke?.types[0]?.type?.name,
+                    ability: newPoke?.abilities[1]?.ability?.name
+                }
+                setItem(pokemon);
                 setSearchBar(true);
                 setText("");
 
@@ -50,7 +60,17 @@ const PokeProvider = ({ children }) => {
                 try {
                     const respuesta = await fetch(json.results[i].url);
                     const pokemon = await respuesta.json()
-                    setPokeItem(prevArray => [...prevArray, pokemon])
+                    const pokemonCard = {
+                        name: pokemon?.name,
+                        id: pokemon?.id,
+                        img: pokemon?.sprites?.front_default,
+                        imgDetail: pokemon?.sprites?.other?.dream_world?.front_default,
+                        height: pokemon?.height,
+                        weight: pokemon?.weight,
+                        type: pokemon?.types[0]?.type?.name,
+                        ability: pokemon?.abilities[1]?.ability?.name
+                    }
+                    setPokeItem(prevArray => [...prevArray, pokemonCard])
                     setStateSpinner(false)
                 } catch (err) {
                     setError(err || "Ocurrió un error")
