@@ -11,7 +11,6 @@ const ItemListContainer = () => {
 
     useEffect(() => {
             getPoke()
-    
     }, [])
 
     if (searchBar ) {
@@ -25,7 +24,6 @@ const ItemListContainer = () => {
             </div>
         )
     } else {
-        
         return (
             <div className="container txtHeader" >
                 <div className="row">

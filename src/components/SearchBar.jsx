@@ -16,6 +16,7 @@ const SearchBar = () => {
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                    required
                 />
                 <Button className="btnSearch" onClick={() =>  getItem(text)} variant="outline-secondary" id="button-addon2">
                     Buscar

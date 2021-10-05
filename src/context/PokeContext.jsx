@@ -14,41 +14,55 @@ const PokeProvider = ({ children }) => {
 
 
     const validarCampos = () => {
-        if (text === "" || text === Number) {
+        if (text === "" ) {
             return false
         } else {
             return true
         };
     }
     const getItem = async (id) => {
-        const url = "https://pokeapi.co/api/v2/pokemon/" + id;
-        const res = await fetch(url);
-        const newPoke = await res.json();
-        setItem(newPoke);
-        setSearchBar(true);
-        setText("");
-    }
+        if (validarCampos) {
+            try {
+                const url = "https://pokeapi.co/api/v2/pokemon/" + id;
+                const res = await fetch(url);
+                const newPoke = await res.json();
+                setItem(newPoke);
+                setSearchBar(true);
+                setText("");
+                
+            } catch (error) {
+                setError(error || "Ocurrió un error")
+                console.log(error);
+            }
+        }
+            
+        }
 
     const getPoke = async () => {
-        try {
-            const url = "https://pokeapi.co/api/v2/pokemon/?limit=16&offset=0";
-            const res = await fetch(url);
-            const json = await res.json();
-            for (let i = 0; i < json.results.length; i++) {
-                try {
-                    const respuesta = await fetch(json.results[i].url);
-                    const pokemon = await respuesta.json()
-                    setPokeItem(prevArray => [...prevArray, pokemon])
-                    setStateSpinner(false)
-                } catch (error) {
-                    setError(error || "Ocurrió un error")
+         //para elegir un id random:
+            const IdRandom = Math.floor(Math.random()*100)+1;
+            console.log(IdRandom);
+            try {
+                const url = "https://pokeapi.co/api/v2/pokemon/?limit=16&offset="+IdRandom;
+                const res = await fetch(url);
+                const json = await res.json();
+                for (let i = 0; i < json.results.length; i++) {
+                    try {
+                        const respuesta = await fetch(json.results[i].url);
+                        const pokemon = await respuesta.json()
+                        setPokeItem(prevArray => [...prevArray, pokemon])
+                        setStateSpinner(false)
+                    } catch (error) {
+                        setError(error || "Ocurrió un error")
+                    }
                 }
+            } catch (error) {
+                setError(error || "Ocurrió un error")
+                console.log(error);
             }
-        } catch (error) {
-            setError(error || "Ocurrió un error")
-            console.log(error);
         }
-    }
+            
+        
 
 
     const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke, item, setItem, getItem, stateSpinner, setStateSpinner, searchBar, setSearchBar }
