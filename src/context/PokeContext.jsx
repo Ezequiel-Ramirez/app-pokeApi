@@ -11,6 +11,8 @@ const PokeProvider = ({ children }) => {
     const [error, setError] = useState("");
     const [stateSpinner, setStateSpinner] = useState(true)
     const [searchBar, setSearchBar] = useState(false)
+    const [prev, setPrev] = useState(null)
+    const [next, setNext] = useState(null)
 
 
     const validarCampos = () => {
@@ -43,19 +45,21 @@ const PokeProvider = ({ children }) => {
             } catch (error) {
                 setError(error || "Ocurrió un error")
                 console.log(error);
-                
+
             }
         }
 
     }
 
     const getPoke = async () => {
-        //para elegir un id random:
-        const IdRandom = Math.floor(Math.random() * 100) + 1;
+
         try {
-            const url = "https://pokeapi.co/api/v2/pokemon/?limit=16&offset=" + IdRandom;
+            const url = "https://pokeapi.co/api/v2/pokemon/?limit=16&offset=0";
             const res = await fetch(url);
             const json = await res.json();
+            setPrev(json.previous);
+            setNext(json.next);
+            setPokeItem([])
             for (let i = 0; i < json.results.length; i++) {
                 try {
                     const respuesta = await fetch(json.results[i].url);
@@ -72,6 +76,7 @@ const PokeProvider = ({ children }) => {
                     }
                     setPokeItem(prevArray => [...prevArray, pokemonCard])
                     setStateSpinner(false)
+                    setSearchBar(false)
                 } catch (err) {
                     setError(err || "Ocurrió un error")
                     console.log(err);
@@ -84,10 +89,47 @@ const PokeProvider = ({ children }) => {
         }
     }
 
+    const pagination = async (id) => {
+        if (id !== null) {
+
+            try {
+                const url = id;
+                const res = await fetch(url);
+                const json = await res.json();
+                setPrev(json.previous);
+                setNext(json.next);
+                setPokeItem([])
+                for (let i = 0; i < json.results.length; i++) {
+                    try {
+                        const respuesta = await fetch(json.results[i].url);
+                        const pokemon = await respuesta.json()
+                        const pokemonCard = {
+                            name: pokemon?.name,
+                            id: pokemon?.id,
+                            img: pokemon?.sprites?.front_default,
+                            imgDetail: pokemon?.sprites?.other?.dream_world?.front_default,
+                            height: pokemon?.height,
+                            weight: pokemon?.weight,
+                            type: pokemon?.types[0]?.type?.name,
+                            ability: pokemon?.abilities[1]?.ability?.name
+                        }
+                        setPokeItem(prevArray => [...prevArray, pokemonCard])
+                        setStateSpinner(false)
+                    } catch (err) {
+                        setError(err || "Ocurrió un error")
+                        console.log(err);
+                    }
+                }
+            } catch (err) {
+                setError(err || "Ocurrió un error")
+
+            }
+
+        }
+    }
 
 
-
-    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke, item, setItem, getItem, stateSpinner, setStateSpinner, searchBar, setSearchBar, error }
+    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke, item, setItem, getItem, stateSpinner, setStateSpinner, searchBar, setSearchBar, error, prev, next, pagination }
     return (
         <PokeContext.Provider value={data}>
             {children}

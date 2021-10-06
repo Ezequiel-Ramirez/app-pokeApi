@@ -5,7 +5,7 @@ import "../css/itemdetail.css"
 import { Link } from 'react-router-dom';
 
 const ItemDetail = () => {
-    const { item, idItem, getItem, stateSpinner, setPokeItem } = useContext(PokeContext);
+    const { item, idItem, getItem, stateSpinner, setSearchBar } = useContext(PokeContext);
 
     useEffect(() => {
         getItem(idItem);
@@ -26,7 +26,7 @@ const ItemDetail = () => {
                         <div className="container d-flex justify-content-center">
                             <button onClick={() => getItem((item.id) - 1)} className="btn btn-outline-dark h-50 m-auto fw-bold">#{item.id - 1}</button>
                             <div className="w-100">
-                                <img className="d-block m-auto w-50" src={item?.imgDetail} alt={item?.name} />
+                                <img className="d-block m-auto w-50" src={item?.img} alt={item?.name} />
                             </div>
                             <div className="w-100">
                                 <div className="d-flex">
@@ -50,7 +50,7 @@ const ItemDetail = () => {
                             </div>
                             <button onClick={() => getItem((item.id) + 1)} className="btn btn-outline-dark h-50 m-auto fw-bold">#{item.id + 1}</button>
                         </div>
-                        <Link to="/" className="text-decoration-none"> <button className="d-block m-auto " onClick={() => setPokeItem([])}>volver</button></Link>
+                        <Link to="/" className="text-decoration-none"> <button className="d-block m-auto " onClick={() => setSearchBar(false)}>volver</button></Link>
                     </>
             }
         </>
