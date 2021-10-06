@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import PokeContext from '../context/PokeContext'
+import "../css/cardpoke.css"
 
 const CardPoke = ({ pokemon }) => {
     const { setIdItem } = useContext(PokeContext);
@@ -9,7 +10,7 @@ const CardPoke = ({ pokemon }) => {
             <div className="card-body ">
                 <Link to="/itemDetail" className="text-decoration-none" >
                     <figure className=" m-auto">
-                        <img className="d-block m-auto" src={pokemon.img} alt={pokemon.name} />
+                        <img className="d-block m-auto " id="imagen" src={pokemon.imgDetail} alt={pokemon.name} />
                         <h3 className="text-center text-dark">{pokemon.name}</h3>
                         <p className="text-center text-dark">#0{pokemon.id}</p>
                     </figure>
