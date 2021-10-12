@@ -27,7 +27,7 @@ const ItemDetail = () => {
                             <button onClick={() => getItem((item.id) - 1)} className="btn btn-outline-dark h-50 m-auto fw-bold">#{item.id - 1}</button>
                             <div className="container-fluid  d-flex flex-column flex-md-row ">
                             <div className="w-100">
-                                <img className="d-block m-auto w-sm-50" src={item?.imgDetail} alt={item?.name} />
+                                <img className="d-block m-auto w-100" src={item?.imgDetail} alt={item?.name} />
                             </div>
                             <div className="w-100">
                                 <div className="d-flex justify-content-center">
