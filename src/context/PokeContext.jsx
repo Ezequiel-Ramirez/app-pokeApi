@@ -54,7 +54,7 @@ const PokeProvider = ({ children }) => {
     const getPoke = async () => {
 
         try {
-            const url = "https://pokeapi.co/api/v2/pokemon/?limit=16&offset=0";
+            const url = "https://pokeapi.co/api/v2/pokemon/";
             const res = await fetch(url);
             const json = await res.json();
             setPrev(json.previous);
@@ -96,6 +96,7 @@ const PokeProvider = ({ children }) => {
                 const url = id;
                 const res = await fetch(url);
                 const json = await res.json();
+
                 setPrev(json.previous);
                 setNext(json.next);
                 setPokeItem([])
