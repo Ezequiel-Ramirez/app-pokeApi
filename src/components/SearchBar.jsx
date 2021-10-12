@@ -15,7 +15,7 @@ const SearchBar = () => {
                     aria-describedby="basic-addon2"
                     type="text"
                     value={text}
-                    onChange={(e) => setText(e.target.value)}
+                    onChange={(e) => setText(e.target.value.toLowerCase())}
                     className="isEmpty(str [, options])"
                     data-errormessage-custom-error="Ingrese un id o nombre válido"
                     data-errormessage-value-missing="Ingrese un id o nombre válido"
