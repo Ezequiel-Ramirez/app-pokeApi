@@ -1,4 +1,11 @@
 .btnSearch{
     background-color: aquamarine;
 }
+@media (max-width:780px){
+
+    .barra{
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+}
 

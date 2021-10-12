@@ -8,8 +8,9 @@ const SearchBar = () => {
 
     return (
         <div className="container ">
-            <InputGroup className="mt-5 w-50 m-auto">
+            <InputGroup className="mt-5 w-50 m-auto barra">
                 <FormControl
+                
                     placeholder="Buscar Pokemon"
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
