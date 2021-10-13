@@ -4,7 +4,7 @@ import PokeContext from '../context/PokeContext'
 import "../css/searchbar.css";
 
 const SearchBar = () => {
-    const { text, setText, getItem } = useContext(PokeContext);
+    const { text, getItem, handleChange } = useContext(PokeContext);
 
     return (
         <div className="container ">
@@ -16,7 +16,7 @@ const SearchBar = () => {
                     aria-describedby="basic-addon2"
                     type="text"
                     value={text}
-                    onChange={(e) => setText(e.target.value.toLowerCase())}
+                    onChange={handleChange}
                     className="isEmpty(str [, options])"
                     data-errormessage-custom-error="Ingrese un id o nombre válido"
                     data-errormessage-value-missing="Ingrese un id o nombre válido"

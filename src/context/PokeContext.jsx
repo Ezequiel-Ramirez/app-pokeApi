@@ -5,6 +5,7 @@ const PokeContext = createContext();
 
 const PokeProvider = ({ children }) => {
     const [pokeItem, setPokeItem] = useState([]);
+    const [pokeSearch, setPokeSearch] = useState([])
     const [text, setText] = useState("");
     const [idItem, setIdItem] = useState("");
     const [item, setItem] = useState([]);
@@ -22,6 +23,33 @@ const PokeProvider = ({ children }) => {
             return true
         };
     }
+
+    /* Busqueda por digito */
+    const handleChange = e => {
+        
+        setText(e.target.value.toLowerCase());
+        filtrar(e.target.value);
+      
+    }
+
+    const filtrar = (terminoBusqueda) => {
+        var resultadosBusqueda = pokeSearch.filter((elemento) => {
+            if (elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+                || elemento.id.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            ) {
+                return elemento;
+            }
+        });
+        setPokeItem(resultadosBusqueda);
+        
+    }
+/* volver y resetear estados */
+const handleReturn =()=>{
+    setSearchBar(false);
+    getPoke()
+
+}
+    /* Busqueda por id o nombre en boton buscar */
     const getItem = async (id) => {
         if (validarCampos) {
             try {
@@ -50,7 +78,7 @@ const PokeProvider = ({ children }) => {
         }
 
     }
-
+/* listado inicial de Pokemones */
     const getPoke = async () => {
 
         try {
@@ -59,7 +87,8 @@ const PokeProvider = ({ children }) => {
             const json = await res.json();
             setPrev(json.previous);
             setNext(json.next);
-            setPokeItem([])
+            setPokeItem([]);
+            /* setPokeSearch([]); */
             for (let i = 0; i < json.results.length; i++) {
                 try {
                     const respuesta = await fetch(json.results[i].url);
@@ -75,6 +104,7 @@ const PokeProvider = ({ children }) => {
                         ability: pokemon?.abilities[1]?.ability?.name
                     }
                     setPokeItem(prevArray => [...prevArray, pokemonCard])
+                    /* setPokeSearch(prevArray => [...prevArray, pokemonCard]) */
                     setStateSpinner(false)
                     setSearchBar(false)
                 } catch (err) {
@@ -88,7 +118,41 @@ const PokeProvider = ({ children }) => {
             alert(err)
         }
     }
+/* listado total de Pokemones */
+const getPokeTotal = async () => {
 
+    try {
+        const url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1118";
+        const res = await fetch(url);
+        const json = await res.json();
+        setPokeSearch([]);
+        for (let i = 0; i < json.results.length; i++) {
+            try {
+                const respuesta = await fetch(json.results[i].url);
+                const pokemon = await respuesta.json()
+                const pokemonCard = {
+                    name: pokemon?.name,
+                    id: pokemon?.id,
+                    img: pokemon?.sprites?.front_default,
+                    imgDetail: pokemon?.sprites?.other?.dream_world?.front_default,
+                    height: pokemon?.height,
+                    weight: pokemon?.weight,
+                    type: pokemon?.types[0]?.type?.name,
+                    ability: pokemon?.abilities[1]?.ability?.name
+                }
+                setPokeSearch(prevArray => [...prevArray, pokemonCard])
+            } catch (err) {
+                setError(err || "Ocurrió un error")
+                console.log(err);
+            }
+        }
+    } catch (err) {
+        setError(err || "Ocurrió un error")
+        console.log(err);
+        alert(err)
+    }
+}
+    /* paginacion */
     const pagination = async (id) => {
         if (id !== null) {
 
@@ -130,7 +194,7 @@ const PokeProvider = ({ children }) => {
     }
 
 
-    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke, item, setItem, getItem, stateSpinner, setStateSpinner, searchBar, setSearchBar, error, prev, next, pagination }
+    const data = { pokeItem, setPokeItem, text, setText, idItem, setIdItem, getPoke, item, setItem, getItem, stateSpinner, setStateSpinner, searchBar, setSearchBar, error, prev, next, pagination, handleChange, handleReturn, getPokeTotal }
     return (
         <PokeContext.Provider value={data}>
             {children}
