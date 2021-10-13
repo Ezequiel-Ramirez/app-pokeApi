@@ -17,6 +17,7 @@ const SearchBar = () => {
                     type="text"
                     value={text}
                     onChange={handleChange}
+                    onKeyDown={e => {if(e.keyCode === 13) { getItem(text)}}}
                     className="isEmpty(str [, options])"
                     data-errormessage-custom-error="Ingrese un id o nombre válido"
                     data-errormessage-value-missing="Ingrese un id o nombre válido"
