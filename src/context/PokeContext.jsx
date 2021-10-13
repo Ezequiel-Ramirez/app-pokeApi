@@ -18,6 +18,7 @@ const PokeProvider = ({ children }) => {
 
     const validarCampos = () => {
         if (text === "") {
+          
             return false
         } else {
             return true
@@ -26,7 +27,6 @@ const PokeProvider = ({ children }) => {
 
     /* Busqueda por digito */
     const handleChange = e => {
-        
         setText(e.target.value.toLowerCase());
         filtrar(e.target.value);
       
@@ -34,12 +34,11 @@ const PokeProvider = ({ children }) => {
 
     const filtrar = (terminoBusqueda) => {
         var resultadosBusqueda = pokeSearch.filter((elemento) => {
-            if (elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-                || elemento.id.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-            ) {
-                return elemento;
-            }
-        });
+                if (elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+                    || elemento.id.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+                    return elemento;
+                }
+            });
         setPokeItem(resultadosBusqueda);
         
     }
@@ -51,6 +50,7 @@ const handleReturn =()=>{
 }
     /* Busqueda por id o nombre en boton buscar */
     const getItem = async (id) => {
+   
         if (validarCampos) {
             try {
                 const url = "https://pokeapi.co/api/v2/pokemon/" + id;
@@ -80,7 +80,8 @@ const handleReturn =()=>{
     }
 /* listado inicial de Pokemones */
     const getPoke = async () => {
-
+            setPrev(null);
+            setNext(null);
         try {
             const url = "https://pokeapi.co/api/v2/pokemon/";
             const res = await fetch(url);
@@ -154,6 +155,7 @@ const getPokeTotal = async () => {
 }
     /* paginacion */
     const pagination = async (id) => {
+        
         if (id !== null) {
 
             try {

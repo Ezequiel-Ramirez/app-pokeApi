@@ -13,7 +13,7 @@ const ItemListContainer = () => {
         if (prev !== null) {
             pagination()
         } else {
-
+           
             getPoke()
         }
 
@@ -21,6 +21,7 @@ const ItemListContainer = () => {
     }, [])
 useEffect(() => {
     getPokeTotal()
+
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
     if (searchBar) {
