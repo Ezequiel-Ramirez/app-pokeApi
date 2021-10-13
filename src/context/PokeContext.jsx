@@ -133,7 +133,6 @@ async () => {
         const res = await fetch(url);
         const json = await res.json();
         setPokeSearch([]);
-        console.log(pokeSearch);
         for (let i = 0; i < json.results.length; i++) {
             try {
                 const respuesta = await fetch(json.results[i].url);
@@ -149,7 +148,6 @@ async () => {
                     ability: pokemon?.abilities[1]?.ability?.name
                 }
                 setPokeSearch(prevArray => [...prevArray, pokemonCard])
-                console.log(pokeSearch);
             } catch (err) {
                 setError(err || "Ocurrió un error")
                 console.log(err);
